@@ -1,14 +1,13 @@
-<%@page import="com.douzone.mysite.repository.UserRepository"%>
-<%@page import="com.douzone.mysite.vo.UserVo"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	UserVo profile = (UserVo)request.getAttribute("profile");
-%>
+
 <html>
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="<%=request.getContextPath() %>/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -18,32 +17,31 @@
 		</div>
 		<div id="content">
 			<div id="user">
-				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user">
+				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user">
 					<input id="a" name="a" type="hidden" value="update">
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="<%=profile.getName()%>">
+					<input id="name" name="name" type="text" value="${profile.name }">
 
 					<label class="block-label" for="email">이메일</label>
-					<%=profile.getEmail() %>
+					${profile.email }
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 					
 					<fieldset>
 						<legend>성별</legend>
-						<%
-						if("female".equals(profile.getGender())){
-						%>
-						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
-						<label>남</label> <input type="radio" name="gender" value="male">
-						<%
-						}else{
-						%>
-						<label>여</label> <input type="radio" name="gender" value="female">
-						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
-						<%
-						}
-						%>
+						
+						<c:choose>
+							<c:when test='${profile.gender == "female" }'>
+								<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
+								<label>남</label> <input type="radio" name="gender" value="male">
+							</c:when>
+							<c:otherwise>
+								<label>여</label> <input type="radio" name="gender" value="female">
+								<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
+							</c:otherwise>
+						</c:choose>
+
 					</fieldset>
 					
 					<input type="submit" value="수정하기">

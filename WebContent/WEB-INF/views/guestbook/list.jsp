@@ -36,7 +36,7 @@
 						<c:forEach items='${list}' var='gb'  varStatus='status'>
 						<table>
 							<tr>
-								<td>[${listCount-status.index }]</td>
+								<td>[${listCount-status.index}]</td>
 								<td>${gb.name }</td>
 								<td>${gb.regDate }</td>
 								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${gb.no }">삭제</a></td>
