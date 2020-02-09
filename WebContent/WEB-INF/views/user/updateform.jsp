@@ -1,0 +1,62 @@
+<%@page import="com.douzone.mysite.repository.UserRepository"%>
+<%@page import="com.douzone.mysite.vo.UserVo"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserVo profile = (UserVo)request.getAttribute("profile");
+%>
+<html>
+<head>
+<title>mysite</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link href="<%=request.getContextPath() %>/assets/css/user.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="container">
+		<div id="header">
+		<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
+		</div>
+		<div id="content">
+			<div id="user">
+				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user">
+					<input id="a" name="a" type="hidden" value="update">
+					<label class="block-label" for="name">이름</label>
+					<input id="name" name="name" type="text" value="<%=profile.getName()%>">
+
+					<label class="block-label" for="email">이메일</label>
+					<%=profile.getEmail() %>
+					
+					<label class="block-label">패스워드</label>
+					<input name="password" type="password" value="">
+					
+					<fieldset>
+						<legend>성별</legend>
+						<%
+						if("female".equals(profile.getGender())){
+						%>
+						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
+						<label>남</label> <input type="radio" name="gender" value="male">
+						<%
+						}else{
+						%>
+						<label>여</label> <input type="radio" name="gender" value="female">
+						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
+						<%
+						}
+						%>
+					</fieldset>
+					
+					<input type="submit" value="수정하기">
+					
+				</form>
+			</div>
+		</div>
+		<div id="navigation">
+		<jsp:include page="/WEB-INF/views/includes/navigation.jsp"/>
+		</div>
+		<div id="footer">
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+		</div>
+	</div>
+</body>
+</html>
