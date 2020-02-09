@@ -16,7 +16,7 @@ public class GuestbookController extends HttpServlet {
 		
 		String actionName = request.getParameter("a");
 		
-		if(request.getParameter("a")==null) {actionName = " ";}// 해당 줄 없으면 오류... 도대체 뭐가 문제일까?
+		//if(request.getParameter("a")==null) {actionName = " ";}// 해당 줄 없으면 오류... 도대체 뭐가 문제일까? // null처리를 
 		
 		Action action = new GuestbookActionFactory().getAction(actionName);
 		action.execute(request,response);
